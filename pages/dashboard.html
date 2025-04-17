@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Resumen</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard-page">
+  <header>
+    <h1>Dashboard</h1>
+  </header>
+
+  <section id="summary">
+    <h2>Resumen</h2>
+    <div class="dashboard-box"><h3>Proveedores</h3><p>Total de proveedores: <strong>50</strong></p></div>
+    <div class="dashboard-box"><h3>Categorías</h3><p>Total de categorías: <strong>10</strong></p></div>
+    <div class="dashboard-box"><h3>Productos</h3><p>Total de productos: <strong>120</strong></p></div>
+  </section>
+
+  <section id="inventory">
+    <h2>Inventario</h2>
+    <canvas id="inventoryChart"></canvas>
+  </section>
+
+  <section id="shipment">
+    <h2>Estado de Envíos</h2>
+    <canvas id="shipmentChart"></canvas>
+  </section>
+
+  <footer>
+    <p>© 2025 StockIA Tu Inventario. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
