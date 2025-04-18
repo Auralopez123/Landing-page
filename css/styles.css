@@ -248,5 +248,53 @@ footer {
     color: #2563EB;
     text-decoration: underline;
   }
-  
-  
+
+#forgotMessage {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-box .secondary-btn {
+    margin-top: 15px;
+}
+
+.secondary-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    background: #ccc;
+    color: #000;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.token-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.token-section button {
+    margin-top: 10px;
+}
+
+/* Reset password specific styles */
+#resetMessage {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-box .secondary-btn {
+    margin-top: 15px;
+}
+
+/* Confirm token page specific styles */
+.confirm-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.volver-link {
+    margin-top: 15px;
+}
+
