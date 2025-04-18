@@ -24,13 +24,19 @@ form.addEventListener('submit', async (event) => {
     const data = await response.json();
 
     if (response.ok) {
+      localStorage.setItem('token', data.token); // ¡IMPORTANTE!
+      window.location.href = '../pages/dashboard.html';
+    }
+    if (data.token) {    
+    
+
       loginMessage.textContent = 'Inicio de sesión exitoso.';
       loginMessage.style.color = 'green';
+
+      // ✅ Redireccionar
       window.location.href = '../pages/dashboard.html';
     } else {
-      // Si el mensaje incluye que la cuenta está pendiente por confirmar
       if (data.message && data.message.toLowerCase().includes('pendiente por confirmar')) {
-        // Redirecciona a la página de confirmación con la bandera en la URL
         window.location.href = 'confirmar-token.html?unconfirmed=true';
       } else {
         loginMessage.textContent = data.message || 'Credenciales incorrectas.';

@@ -153,6 +153,7 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
+    margin-top: 0;
 }
 
 /* Responsive */
@@ -196,6 +197,7 @@ footer {
 #passwordMatchMessage.valid {
     color: green;
 }
+
 .button-group-button {
     width: 100%;
     padding: 14px;
@@ -217,6 +219,7 @@ footer {
 .button-group-button:hover {
     background-color: #1e40af;
 }
+
 .secondary-btn {
     width: 100%;
     padding: 14px;
@@ -238,15 +241,15 @@ footer {
 .secondary-btn:hover {
     background-color: #1e40af;
 }
+
 .forgot-link {
     text-align: center;
     margin-top: 15px;
-  }
-  
-  .forgot-link a {
+}
+
+.forgot-link a {
     font-size: 14px;
     color: #2563EB;
     text-decoration: underline;
-  }
-  
-  
+}
+
