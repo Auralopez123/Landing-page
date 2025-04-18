@@ -22,30 +22,38 @@ form.addEventListener('submit', async (event) => {
     });
 
     const data = await response.json();
+    console.log('Respuesta del login:', data);
 
-    if (response.ok) {
-      localStorage.setItem('token', data.token); // ¡IMPORTANTE!
-      window.location.href = '../pages/dashboard.html';
-    }
-    if (data.token) {    
-    
+    // ✅ Accedemos correctamente al token
+    const token = data?.data?.token;
 
-      loginMessage.textContent = 'Inicio de sesión exitoso.';
+    if (response.ok && token) {
+      localStorage.setItem('token', token);
+      loginMessage.textContent = data.message || 'Inicio de sesión exitoso.';
       loginMessage.style.color = 'green';
 
-      // ✅ Redireccionar
-      window.location.href = '../pages/dashboard.html';
-    } else {
-      if (data.message && data.message.toLowerCase().includes('pendiente por confirmar')) {
-        window.location.href = 'confirmar-token.html?unconfirmed=true';
-      } else {
-        loginMessage.textContent = data.message || 'Credenciales incorrectas.';
-        loginMessage.style.color = 'red';
-      }
+      setTimeout(() => {
+        console.log('Redirigiendo...');
+        window.location.assign('/pages/dashboard.html');
+      }, 1000);
+      return;
     }
+
+    if (data.message && data.message.toLowerCase().includes('pendiente por confirmar')) {
+      window.location.href = 'confirmar-token.html?unconfirmed=true';
+      return;
+    }
+
+    loginMessage.textContent = data.message || 'Credenciales incorrectas.';
+    loginMessage.style.color = 'red';
+    return;
+
   } catch (error) {
     console.error(error);
     loginMessage.textContent = 'Error al conectar con el servidor.';
     loginMessage.style.color = 'red';
   }
 });
+
+
+

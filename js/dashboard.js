@@ -1,3 +1,5 @@
+import Chart from 'chart.js/auto';
+
 const token = localStorage.getItem('token');
 console.log('Token cargado:', token);
 
@@ -14,32 +16,42 @@ async function fetchData() {
 
     // Obtener perfil del usuario
     const userRes = await fetch('http://173.212.224.226:3000/users/profile', { headers });
-    if (userRes.status === 401) {
-      console.warn('Token inválido, redireccionando...');
-      localStorage.removeItem('token');
-      window.location.href = 'login.html';
-      return;
-    }
-    const user = await userRes.json();
-    document.getElementById('userEmail').textContent = user.email || '--';
+    const userData = await userRes.json();
+    document.getElementById('userEmail').textContent = userData.data?.email || '--';
 
     // Obtener productos
     const productRes = await fetch('http://173.212.224.226:3000/products', { headers });
-    const products = await productRes.json();
-    if (!Array.isArray(products)) {
-      console.error('Error: productos no es un array:', products);
-      return;
-    }
+    const productData = await productRes.json();
+    const products = productData.data || [];
     document.getElementById('productCount').textContent = products.length;
 
-    // Obtener categorías
+    // Obtener categorias
     const categoryRes = await fetch('http://173.212.224.226:3000/categories', { headers });
-    const categories = await categoryRes.json();
-    if (!Array.isArray(categories)) {
-      console.error('Error: categorías no es un array:', categories);
-      return;
-    }
+    const categoryData = await categoryRes.json();
+    const categories = categoryData.data || [];
     document.getElementById('categoryCount').textContent = categories.length;
+
+    // Renderizar tabla productos
+    const productTable = document.getElementById('productsTable');
+    productTable.innerHTML = products.map(p => `
+      <tr>
+        <td>${p._id}</td>
+        <td>${p.name}</td>
+        <td>${p.category?.name || 'Sin categoría'}</td>
+        <td>${p.quantity}</td>
+        <td>${new Date(p.createdAt).toLocaleDateString()}</td>
+      </tr>
+    `).join('');
+
+    // Renderizar tabla categorias
+    const categoryTable = document.getElementById('categoriesTable');
+    categoryTable.innerHTML = categories.map(c => `
+      <tr>
+        <td>${c._id}</td>
+        <td>${c.name}</td>
+        <td>${new Date(c.createdAt).toLocaleDateString()}</td>
+      </tr>
+    `).join('');
 
     // Gráfico de inventario por categoría
     const categoryMap = {};
@@ -53,7 +65,7 @@ async function fetchData() {
     const sorted = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
     const recentLabels = sorted.map(p => p.name || 'Producto');
     const recentValues = sorted.map(p => p.quantity || 0);
-    renderChart('recentProductsChart', recentLabels, recentValues, 'Últimos productos agregados');
+    renderChart('recentProductsChart', recentLabels, recentValues, 'Ultimos productos agregados');
 
   } catch (error) {
     console.error('Error al cargar datos del dashboard:', error);
@@ -86,3 +98,4 @@ function renderChart(canvasId, labels, data, label = '') {
 }
 
 fetchData();
+
