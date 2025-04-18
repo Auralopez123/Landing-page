@@ -238,3 +238,15 @@ footer {
 .secondary-btn:hover {
     background-color: #1e40af;
 }
+.forgot-link {
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .forgot-link a {
+    font-size: 14px;
+    color: #2563EB;
+    text-decoration: underline;
+  }
+  
+  

@@ -28,8 +28,14 @@ form.addEventListener('submit', async (event) => {
       loginMessage.style.color = 'green';
       window.location.href = '../pages/dashboard.html';
     } else {
-      loginMessage.textContent = data.message || 'Credenciales incorrectas.';
-      loginMessage.style.color = 'red';
+      // Si el mensaje incluye que la cuenta está pendiente por confirmar
+      if (data.message && data.message.toLowerCase().includes('pendiente por confirmar')) {
+        // Redirecciona a la página de confirmación con la bandera en la URL
+        window.location.href = 'confirmar-token.html?unconfirmed=true';
+      } else {
+        loginMessage.textContent = data.message || 'Credenciales incorrectas.';
+        loginMessage.style.color = 'red';
+      }
     }
   } catch (error) {
     console.error(error);

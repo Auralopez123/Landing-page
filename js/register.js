@@ -57,7 +57,7 @@ confirmTokenBtn.addEventListener('click', async () => {
   const token = tokenInput.value;
 
   try {
-    const response = await fetch('http://173.212.224.226:3000/users/confirm', {
+    const response = await fetch('http://173.212.224.226:3000/users/confirm-email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token })
