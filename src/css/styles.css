@@ -1,0 +1,260 @@
+/* Estilo general */
+:root {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+body.modern-login {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+} 
+
+/* Contenedor general */
+.container {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+}
+
+/* Panel izquierdo */
+.left-panel {
+    flex: 1;
+    background: linear-gradient(to bottom right, #3d7c97, #294b56, #2c5364);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.left-panel .logo-container {
+    text-align: center;
+}
+
+.left-panel img {
+    max-width: 380px;
+    margin-bottom: 35px;
+    transition: transform 0.3s ease;
+}
+
+.left-panel img:hover {
+    transform: scale(1.05);
+}
+
+.left-panel h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.left-panel span {
+    color: #2563EB;
+}
+
+.left-panel p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #2563EB, #3B82F6);
+    color: #fff;
+    padding: 14px 30px;
+    font-weight: bold;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+    transition: 0.3s ease;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.7);
+}
+
+.download-btn:active {
+    transform: scale(0.95);
+}
+
+/* Panel derecho */
+.right-panel {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-box {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-box h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    text-align: center;
+    color: #333;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Agrupar campos en una sola línea */
+.double-inputs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.double-inputs input {
+    flex: 1;
+    min-width: 45%;
+}
+
+.button-group button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #2563EB;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        border-radius: 0;
+    }
+}
+
+/* Requisitos contraseña */
+#passwordRequirements {
+    margin-top: 10px;
+    font-size: 0.9em;
+    text-align: left;
+}
+
+#passwordRequirements ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#passwordRequirements li {
+    color: red;
+}
+
+#passwordRequirements li.valid {
+    color: green;
+}
+
+#passwordMatchMessage {
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: red;
+}
+
+#passwordMatchMessage.valid {
+    color: green;
+}
+
+.button-group-button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    transition: background-color 0.3s ease;
+}
+
+.button-group-button:hover {
+    background-color: #1e40af;
+}
+
+.secondary-btn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    font-size: 16px;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: normal;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background-color: #1e40af;
+}
+
+.forgot-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.forgot-link a {
+    font-size: 14px;
+    color: #2563EB;
+    text-decoration: underline;
+  }
+  
+  
