@@ -4,7 +4,7 @@ import Register from './components/Register'
 import ForgotPassword from './components/ForgotPassword'
 import ConfirmEmail from './components/ConfirmEmail'
 import ResetPassword from './components/ResetPassword'
-import Dashboard from './components/Dashboard'
+import Dashboard from './components/dashboard/Dashboard'
 
 export default function App() {
   return (
