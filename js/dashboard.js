@@ -14,32 +14,39 @@ async function fetchData() {
       'Content-Type': 'application/json'
     };
 
-    // Obtener perfil del usuario
-    const userRes = await fetch('http://173.212.224.226:3000/users/profile', { headers });
+    const [userRes, productRes, categoryRes] = await Promise.all([
+      fetch('http://173.212.224.226:3000/users/profile', { headers }),
+      fetch('http://173.212.224.226:3000/products', { headers }),
+      fetch('http://173.212.224.226:3000/categories', { headers })
+    ]);
+
     const userData = await userRes.json();
-    document.getElementById('userEmail').textContent = userData.data?.email || '--';
-
-    // Obtener productos
-    const productRes = await fetch('http://173.212.224.226:3000/products', { headers });
     const productData = await productRes.json();
-    const products = productData.data || [];
-    document.getElementById('productCount').textContent = products.length;
-
-    // Obtener categorias
-    const categoryRes = await fetch('http://173.212.224.226:3000/categories', { headers });
     const categoryData = await categoryRes.json();
+
+    const user = userData.data;
+    const products = productData.data || [];
     const categories = categoryData.data || [];
+
+    document.getElementById('userEmail').textContent = user?.email || '--';
+    document.getElementById('productCount').textContent = products.length;
     document.getElementById('categoryCount').textContent = categories.length;
+
+    // Crear mapa de categorías para fácil acceso
+    const categoryMap = {};
+    categories.forEach(c => {
+      categoryMap[c.id] = c.name;
+    });
 
     // Renderizar tabla productos
     const productTable = document.getElementById('productsTable');
     productTable.innerHTML = products.map(p => `
       <tr>
-        <td>${p._id}</td>
+        <td>${p.id}</td>
         <td>${p.name}</td>
-        <td>${p.category?.name || 'Sin categoría'}</td>
+        <td>${categoryMap[p.categoryId] || 'Sin categoría'}</td>
         <td>${p.quantity}</td>
-        <td>${new Date(p.createdAt).toLocaleDateString()}</td>
+        <td>${p.createdAt ? new Date(p.createdAt).toLocaleDateString() : '--'}</td>
       </tr>
     `).join('');
 
@@ -47,25 +54,25 @@ async function fetchData() {
     const categoryTable = document.getElementById('categoriesTable');
     categoryTable.innerHTML = categories.map(c => `
       <tr>
-        <td>${c._id}</td>
+        <td>${c.id}</td>
         <td>${c.name}</td>
-        <td>${new Date(c.createdAt).toLocaleDateString()}</td>
+        <td>${c.createdAt ? new Date(c.createdAt).toLocaleDateString() : '--'}</td>
       </tr>
     `).join('');
 
     // Gráfico de inventario por categoría
-    const categoryMap = {};
+    const grouped = {};
     products.forEach(p => {
-      const cat = p.category?.name || 'Sin categoría';
-      categoryMap[cat] = (categoryMap[cat] || 0) + 1;
+      const name = categoryMap[p.categoryId] || 'Sin categoría';
+      grouped[name] = (grouped[name] || 0) + (p.quantity || 0);
     });
-    renderChart('inventoryChart', Object.keys(categoryMap), Object.values(categoryMap), 'Inventario por categoría');
+    renderChart('inventoryChart', Object.keys(grouped), Object.values(grouped), 'Inventario por categoría');
 
     // Gráfico de productos recientes
-    const sorted = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
-    const recentLabels = sorted.map(p => p.name || 'Producto');
-    const recentValues = sorted.map(p => p.quantity || 0);
-    renderChart('recentProductsChart', recentLabels, recentValues, 'Ultimos productos agregados');
+    const recent = [...products].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5);
+    const recentLabels = recent.map(p => p.name);
+    const recentValues = recent.map(p => p.quantity);
+    renderChart('recentProductsChart', recentLabels, recentValues, 'Últimos productos agregados');
 
   } catch (error) {
     console.error('Error al cargar datos del dashboard:', error);
@@ -80,11 +87,13 @@ function renderChart(canvasId, labels, data, label = '') {
     type: 'bar',
     data: {
       labels,
-      datasets: [{
-        label: label,
-        data,
-        backgroundColor: '#2563EB'
-      }]
+      datasets: [
+        {
+          label: label,
+          data,
+          backgroundColor: '#2563EB'
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -98,4 +107,3 @@ function renderChart(canvasId, labels, data, label = '') {
 }
 
 fetchData();
-
