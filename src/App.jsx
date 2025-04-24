@@ -5,6 +5,8 @@ import ForgotPassword from './components/ForgotPassword'
 import ConfirmEmail from './components/ConfirmEmail'
 import ResetPassword from './components/ResetPassword'
 import Dashboard from './components/dashboard/Dashboard'
+import About from './components/dashboard/About'
+import Contact from './components/dashboard/Contact'
 
 export default function App() {
   return (
@@ -12,13 +14,13 @@ export default function App() {
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-
       <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/Confirm-email" element={<ConfirmEmail />} />
+      <Route path="/confirm-email" element={<ConfirmEmail />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/dashboard" element={<Dashboard />} />
-
-   
+      <Route path="/about" element={<About />} />
+      <Route path="/contact" element={<Contact />} />
     </Routes>
   )
 }
+

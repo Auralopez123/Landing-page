@@ -1,0 +1,107 @@
+/* Contenedor principal de la página */
+.page-container {
+    background-color: #1e2a3a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Contenido entre Header y Footer */
+  .page-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 80px;
+  }
+  
+  /* Contenedor de la sección de contacto */
+  .contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    width: 100%;
+  }
+  
+  /* Bloque de información */
+  .contact-info {
+    flex: 1;
+    min-width: 320px;
+  }
+  
+  /* Título de la sección */
+  .contact-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    border-left: 4px solid #00bfff;
+    padding-left: 15px;
+  }
+  
+  /* Lista de datos de contacto */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact-list li {
+    margin-bottom: 24px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  
+  /* Íconos dentro de la lista */
+  .contact-list li i {
+    font-size: 1.3rem;
+    color: #00bfff;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  
+  /* Imagen de contacto */
+  .contact-image img {
+    max-width: 420px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-image img:hover {
+    transform: scale(1.03);
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .page-content {
+      padding: 40px 20px;
+    }
+  
+    .contact-section {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .contact-image img {
+      max-width: 100%;
+    }
+  
+    .contact-title {
+      font-size: 1.5rem;
+    }
+  
+    .contact-list li {
+      font-size: 1.05rem;
+    }
+  }
+  
+  
