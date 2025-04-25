@@ -7,6 +7,8 @@ export default function Sidebar({ setSection }) {
       <a href="#" onClick={() => setSection('dashboard')}>Dashboard</a>
       <a href="#" onClick={() => setSection('products')}>Productos</a>
       <a href="#" onClick={() => setSection('categories')}>Categorías</a>
+      <a href="/downloads/stockia.apk" className="download-btn" download>Descargar APK</a>
+
     </div>
   )
 }

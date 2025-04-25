@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import logo from '../assets/logo.svg'
+import logo from '../assets/logo_solo.svg'
 import '../css/Header.css'
 
 export default function Header() {
@@ -18,8 +18,8 @@ export default function Header() {
     <header className="main-header">
       <div className="header-left">
         <Link to="/" className="logo-link">
-          <img src={logo} alt="Logo StockIA" className="logo" />
-          <span className="brand-name">StockIA</span>
+        <img src={logo} alt="Logo StockIA" className="logo" style={{ filter: 'brightness(0) invert(1)' }} />
+        <span className="brand-name">StockIA</span>
         </Link>
       </div>
       <div className="header-right">
