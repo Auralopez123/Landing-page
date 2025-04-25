@@ -13,11 +13,18 @@ body.modern-login {
 } 
 
 
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  
 /* Contenedor general */
 .container {
     display: flex;
     flex: 1;
-    height: 100vh;
+    min-height: 100vh;
+    overflow-y: auto;
+
 }
 
 /* Panel izquierdo */
@@ -99,7 +106,7 @@ body.modern-login {
     width: 70%;
     max-width: 400px;
     background: #fff;
-    padding: 5px;
+    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }

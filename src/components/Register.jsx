@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import logo from '../assets/logo.svg'
 
 export default function Register() {
@@ -22,6 +22,7 @@ export default function Register() {
   const [tokenVisible, setTokenVisible] = useState(false)
   const [tokenInput, setTokenInput] = useState('')
   const [tokenMessage, setTokenMessage] = useState('')
+  const navigate = useNavigate()
 
   // Validate password requirements and match
   useEffect(() => {
@@ -37,6 +38,14 @@ export default function Register() {
 
   const handleRegister = async e => {
     e.preventDefault()
+
+    // Validar teléfono de 10 dígitos
+    if (phone.length !== 10) {
+      setRegisterMessage('El teléfono debe tener exactamente 10 dígitos.')
+      setMsgColor('red')
+      return
+    }
+
     if (!match) {
       setRegisterMessage('Las contraseñas no coinciden.')
       setMsgColor('red')
@@ -81,9 +90,11 @@ export default function Register() {
         body: JSON.stringify({ token: tokenInput })
       })
       const data = await res.json()
+
       if (res.ok) {
         setTokenMessage('Token confirmado. Ya puedes iniciar sesión.')
         setMsgColor('green')
+        setTimeout(() => navigate('/login'), 1000)
       } else {
         setTokenMessage(data.message || 'Token inválido o expirado.')
         setMsgColor('red')
@@ -108,78 +119,92 @@ export default function Register() {
 
       <div className="right-panel">
         <div className="form-box">
-          <h2>Registro</h2>
-          <form onSubmit={handleRegister}>
-            <input
-              type="text"
-              placeholder="Nombre completo"
-              value={fullName}
-              onChange={e => setFullName(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              placeholder="Nombre de la empresa"
-              value={companyName}
-              onChange={e => setCompanyName(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              placeholder="Teléfono"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
-              required
-            />
-            <input
-              type="email"
-              placeholder="Correo electrónico"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Crear contraseña"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Confirmar contraseña"
-              value={confirmPassword}
-              onChange={e => setConfirmPassword(e.target.value)}
-              required
-            />
+          { !tokenVisible ? (
+            <>
+              <h2>Registro</h2>
+              <form onSubmit={handleRegister}>
+                <input
+                  type="text"
+                  placeholder="Nombre completo"
+                  value={fullName}
+                  onChange={e => setFullName(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Nombre de la empresa"
+                  value={companyName}
+                  onChange={e => setCompanyName(e.target.value)}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Teléfono"
+                  value={phone}
+                  inputMode="numeric"
+                  pattern="\d{10}"
+                  title="Debe contener exactamente 10 dígitos"
+                  minLength={10}
+                  maxLength={10}
+                  onChange={e => {
+                    const onlyNums = e.target.value.replace(/\D/g, '')
+                    if (onlyNums.length <= 10) {
+                      setPhone(onlyNums)
+                    }
+                  }}
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Correo electrónico"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Crear contraseña"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  required
+                />
+                <input
+                  type="password"
+                  placeholder="Confirmar contraseña"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                  required
+                />
 
-            <div id="passwordRequirements">
-              <p>La contraseña debe contener:</p>
-              <ul>
-                <li className={requirements.length ? 'valid' : 'invalid'}>Al menos 8 caracteres</li>
-                <li className={requirements.uppercase ? 'valid' : 'invalid'}>Una letra mayúscula</li>
-                <li className={requirements.lowercase ? 'valid' : 'invalid'}>Una letra minúscula</li>
-                <li className={requirements.number ? 'valid' : 'invalid'}>Un número</li>
-                <li className={requirements.special ? 'valid' : 'invalid'}>Un carácter especial (!@#$%^&*)</li>
-              </ul>
-            </div>
-            {password && (
-              <div id="passwordMatchMessage" className={match ? 'valid' : 'invalid'}>
-                {match ? 'Las contraseñas coinciden.' : 'Las contraseñas no coinciden.'}
-              </div>
-            )}
+                <div id="passwordRequirements">
+                  <p>La contraseña debe contener:</p>
+                  <ul>
+                    <li className={requirements.length ? 'valid' : 'invalid'}>Al menos 8 caracteres</li>
+                    <li className={requirements.uppercase ? 'valid' : 'invalid'}>Una letra mayúscula</li>
+                    <li className={requirements.lowercase ? 'valid' : 'invalid'}>Una letra minúscula</li>
+                    <li className={requirements.number ? 'valid' : 'invalid'}>Un número</li>
+                    <li className={requirements.special ? 'valid' : 'invalid'}>Un carácter especial (!@#$%^&*)</li>
+                  </ul>
+                </div>
+                {password && (
+                  <div id="passwordMatchMessage" className={match ? 'valid' : 'invalid'}>
+                    {match ? 'Las contraseñas coinciden.' : 'Las contraseñas no coinciden.'}
+                  </div>
+                )}
 
-            <div className="button-group">
-              <button type="submit">Registrarse</button>
-              <div className="forgot-link"> <Link to="/login" className="secondary-link">Ya tengo cuenta</Link></div>             
-            </div>
-            {registerMessage && (
-              <p style={{ color: msgColor, marginTop: '1rem' }}>{registerMessage}</p>
-            )}
-          </form>
-
-          {tokenVisible && (
-            <div id="tokenConfirmation" className="token-section">
+                <div className="button-group">
+                  <button type="submit">Registrarse</button>
+                  <div className="forgot-link">
+                    <Link to="/login" className="secondary-link">Ya tengo cuenta</Link>
+                  </div>
+                </div>
+                {registerMessage && (
+                  <p style={{ color: msgColor, marginTop: '1rem' }}>{registerMessage}</p>
+                )}
+              </form>
+            </>
+          ) : (
+            <div id="tokenConfirmation" className="button-group">
               <h3>Confirmar registro</h3>
               <input
                 type="text"
