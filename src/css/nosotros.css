@@ -1,47 +1,67 @@
 /* src/css/nosotros.css */
 
 .page-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .about-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 40px;
-    gap: 30px;
-    background: #F3F4F6;
-    flex-grow: 1;
-  }
-  
-  .about-text {
-    flex: 1;
-    color: #333;
-    font-size: 22px;
-    line-height: 1.6;
-    text-align: justify;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
-  }
-  
-  .about-text h1 {
-    font-size: 5rem;
-    font-weight: bold;
-    color: #1F2937;
-    margin-bottom: 20px;
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  gap: 30px;
+  background: #F3F4F6;
+  flex-grow: 1;
+}
+
+.about-text {
+  flex: 1;
+  color: #333;
+  font-size: 22px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.about-text h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #1F2937;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.about-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.about-image img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌐 Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
     text-align: center;
   }
-  
-  .about-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+
+  .about-text {
+    font-size: 18px;
   }
-  
+
+  .about-text h1 {
+    font-size: 2.2rem;
+  }
+
   .about-image img {
-    max-width: 50%;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
   }
-  
+}

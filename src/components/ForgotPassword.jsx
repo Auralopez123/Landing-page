@@ -11,7 +11,7 @@ export default function ForgotPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const res = await fetch('http://173.212.224.226:3000/users/forgot-password', {
+      const res = await fetch('https://stock-ia.duckdns.org/users/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

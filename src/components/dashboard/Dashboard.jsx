@@ -40,9 +40,9 @@ export default function Dashboard() {
       try {
         const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' }
         const [userRes, prodRes, catRes] = await Promise.all([
-          fetch('http://173.212.224.226:3000/users/profile', { headers }),
-          fetch('http://173.212.224.226:3000/products', { headers }),
-          fetch('http://173.212.224.226:3000/categories', { headers })
+          fetch('https://stock-ia.duckdns.org/users/profile', { headers }),
+          fetch('https://stock-ia.duckdns.org/products', { headers }),
+          fetch('https://stock-ia.duckdns.org/categories', { headers })
         ])
         const userData = await userRes.json()
         const prodData = await prodRes.json()

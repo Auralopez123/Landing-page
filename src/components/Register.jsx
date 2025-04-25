@@ -44,7 +44,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch('http://173.212.224.226:3000/users/register', {
+      const res = await fetch('https://stock-ia.duckdns.org', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -75,7 +75,7 @@ export default function Register() {
 
   const handleConfirm = async () => {
     try {
-      const res = await fetch('http://173.212.224.226:3000/users/confirm-email', {
+      const res = await fetch('https://stock-ia.duckdns.org/users/confirm-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: tokenInput })
