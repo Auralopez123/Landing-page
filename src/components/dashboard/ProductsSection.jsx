@@ -1,6 +1,8 @@
 // src/components/dashboard/ProductsSection.jsx
 import React, { useState } from 'react'
 import { FaSort } from 'react-icons/fa'
+import noImage from '/src/assets/no_image.jpg';
+
 
 export default function ProductsSection({ products, categories, setSearchTerm, setSortBy }) {
   const [sortField, setSortField] = useState('name')
@@ -63,15 +65,12 @@ export default function ProductsSection({ products, categories, setSearchTerm, s
           {sortedProducts.map(p => (
             <tr key={p.id}>
               <td>
-                <img
-                  src={
-                    p.image_url
-                      ? `https://stock-ia.duckdns.org${p.image_url}`
-                      : 'src/assets/no_image.jpg'
-                  }
-                  alt={p.name}
-                  className="product-image"
-                />
+              <img
+                src={p.image_url ? `https://stock-ia.duckdns.org${p.image_url}` : noImage}
+                alt={p.name}
+                className="product-image"
+              />
+
               </td>
               <td>{p.name}</td>
               <td>{p.quantity}</td>
