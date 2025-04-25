@@ -44,7 +44,7 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch('https://stock-ia.duckdns.org', {
+      const res = await fetch('https://stock-ia.duckdns.org/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
