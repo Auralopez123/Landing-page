@@ -70,7 +70,7 @@
   
   /* Imagen de contacto */
   .contact-image img {
-    max-width: 420px;
+    max-width: 300px;
     border-radius: 14px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
     transition: transform 0.3s ease;

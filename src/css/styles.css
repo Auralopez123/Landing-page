@@ -90,16 +90,16 @@ body.modern-login {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 50px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
 .form-box {
-    width: 100%;
+    width: 70%;
     max-width: 400px;
     background: #fff;
-    padding: 40px;
+    padding: 5px;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }

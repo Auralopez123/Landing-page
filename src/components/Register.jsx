@@ -171,7 +171,7 @@ export default function Register() {
 
             <div className="button-group">
               <button type="submit">Registrarse</button>
-              <Link to="/login" className="secondary-link">Ya tengo cuenta</Link>
+              <div className="forgot-link"> <Link to="/login" className="secondary-link">Ya tengo cuenta</Link></div>             
             </div>
             {registerMessage && (
               <p style={{ color: msgColor, marginTop: '1rem' }}>{registerMessage}</p>

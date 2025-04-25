@@ -66,7 +66,7 @@ export default function ProductsSection({ products, categories, setSearchTerm, s
                 <img
                   src={
                     p.image_url
-                      ? `hhttps://stock-ia.duckdns.org${p.image_url}`
+                      ? `https://stock-ia.duckdns.org${p.image_url}`
                       : 'src/assets/no_image.jpg'
                   }
                   alt={p.name}
