@@ -1,9 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/logo.svg'
-import './Header.css'
+import '../css/Header.css'
 
 export default function Header() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    setIsLoggedIn(!!token)
+  }, [location]) // Esto vuelve a verificar si cambia la ruta
+
+  const showConditionalLink = location.pathname === '/about' || location.pathname === '/contact'
+
   return (
     <header className="main-header">
       <div className="header-left">
@@ -13,16 +23,14 @@ export default function Header() {
         </Link>
       </div>
       <div className="header-right">
+      {showConditionalLink && (
+          isLoggedIn
+            ? <Link to="/dashboard">Dashboard</Link>
+            : <Link to="/login">Login</Link>
+        )}
         <Link to="/about">Sobre nosotros</Link>
         <Link to="/contact">Contáctanos</Link>
       </div>
     </header>
   )
 }
-
-
-
-
-
-
-

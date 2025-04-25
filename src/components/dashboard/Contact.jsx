@@ -7,7 +7,6 @@ import contactImg from '../../assets/contactenos.jpg'
 export default function Contact() {
   return (
     <div className="page-container">
-      <Header />
 
       <div className="page-content">
         <div className="contact-section">
@@ -28,7 +27,6 @@ export default function Contact() {
         </div>
       </div>
 
-      <Footer />
     </div>
   )
 }

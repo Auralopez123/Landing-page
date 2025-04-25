@@ -64,7 +64,6 @@ export default function Dashboard() {
 
   return (
     <>
-      <Header />
       <div className="dashboard-page" style={{ display: 'flex' }}>
         <Sidebar setSection={setSection} />
         <div className="main-content">
@@ -95,7 +94,6 @@ export default function Dashboard() {
           )}
         </div>
       </div>
-      <Footer />
     </>
   )
 }

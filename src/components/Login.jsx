@@ -42,7 +42,6 @@ export default function Login() {
 
   return (
     <>
-      <Header />
       <div className="container modern-login">
         <div className="left-panel">
           <div className="logo-container">
@@ -88,7 +87,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   )
 }

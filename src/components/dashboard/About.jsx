@@ -7,7 +7,6 @@ import equipo from '../../assets/equipo.jpg'
 export default function About() {
   return (
     <div className="page-container">
-      <Header />
       <div className="about-content compact-layout">
         <div className="about-text">
           <h1>¿Quienes somos?</h1>
@@ -26,7 +25,6 @@ export default function About() {
           <img src={equipo} alt="Equipo StockIA" />
         </div>
       </div>
-      <Footer />
     </div>
   )
 }
