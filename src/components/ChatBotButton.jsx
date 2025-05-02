@@ -14,7 +14,12 @@ const ChatBotButton = () => {
     if (!input.trim()) return;
 
     const userMessage = { role: 'user', content: input };
-    setChat(prev => [...prev, userMessage]);
+    const newChat = [...chat, userMessage];
+    const botMessage = { role: 'assistant', content: '' };
+    const messageIndex = newChat.length;
+
+    // Añadir mensaje del usuario y espacio para el bot
+    setChat([...newChat, botMessage]);
     setLoading(true);
 
     try {
@@ -24,17 +29,46 @@ const ChatBotButton = () => {
         body: JSON.stringify({
           model: 'granite3.3:2b',
           messages: [{ role: 'user', content: `Responde en español: ${input}` }],
-          stream: false
+          stream: true
         })
       });
 
-      const data = await res.json();
-      const botMessage = {
-        role: 'assistant',
-        content: data.message?.content || 'No se recibió respuesta'
-      };
+      if (!res.body) throw new Error('No se pudo iniciar el stream');
 
-      setChat(prev => [...prev, botMessage]);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let partial = '';
+      let accumulated = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        partial += decoder.decode(value, { stream: true });
+        const lines = partial.split('\n');
+        partial = lines.pop(); // Guarda la línea incompleta para la próxima vuelta
+
+        for (const line of lines) {
+          if (!line.trim()) continue;
+          try {
+            const json = JSON.parse(line);
+            const text = json.message?.content || '';
+            accumulated += text;
+
+            setChat(prev => {
+              const updated = [...prev];
+              updated[messageIndex] = {
+                role: 'assistant',
+                content: accumulated
+              };
+              return updated;
+            });
+          } catch (err) {
+            console.warn('No se pudo parsear línea:', line);
+          }
+        }
+      }
+
       setInput('');
     } catch (error) {
       console.error('Error:', error);
@@ -56,14 +90,16 @@ const ChatBotButton = () => {
             Chat con StockIA
             <span className="chat-close" onClick={toggleChat}>×</span>
           </div>
+
           <div className="chat-body">
             {chat.map((msg, idx) => (
               <div key={idx} className={`chat-message ${msg.role}`}>
                 <strong>{msg.role === 'user' ? 'Tú' : 'Bot'}:</strong> {msg.content}
               </div>
             ))}
-            {loading && <div className="chat-message bot">Escribiendo...</div>}
+            {loading && <div className="chat-message assistant">Escribiendo...</div>}
           </div>
+
           <div className="chat-footer">
             <input
               type="text"

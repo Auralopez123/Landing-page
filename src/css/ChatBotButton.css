@@ -26,9 +26,9 @@
   
   .chat-window {
     position: fixed;
-    bottom: 90px;
-    right: 20px;
-    width: 320px;
+    bottom: 100px;
+    right: 50px;
+    width: 380px;
     background: white;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -42,7 +42,7 @@
   .chat-header {
     background-color: #2563EB;
     color: white;
-    padding: 10px 15px;
+    padding: 15px 25px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -55,8 +55,8 @@
   }
   
   .chat-body {
-    padding: 10px;
-    height: 120px;
+    padding: 20px;
+    height: 200px;
     overflow-y: auto;
     font-size: 14px;
     color: #333;
