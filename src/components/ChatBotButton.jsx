@@ -20,18 +20,20 @@ const ChatBotButton = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           model: 'granite3.3:2b',
-          messages: [{ role: 'user', content: input }]
+          messages: [{ role: 'user', content: `Responde en español: ${input}` }],
+          stream: false // Desactivar streaming
         })
       });
 
       const data = await res.json();
-      setResponse(data.message?.content || 'Sin respuesta del modelo');
+      setResponse(data.message?.content || 'No se recibió respuesta');
     } catch (error) {
-      setResponse('Error al conectarse al chatbot.');
+      console.error('Error:', error);
+      setResponse('Error al conectarse al chatbot');
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
-
+  }
   return (
     <>
       <button className="chat-bot-button" onClick={toggleChat}>
