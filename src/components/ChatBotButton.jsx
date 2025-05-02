@@ -5,7 +5,7 @@ import chatLogo from '../assets/chatbot.svg';
 const ChatBotButton = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
+  const [chat, setChat] = useState([]); // 🟢 Historial de chat
   const [loading, setLoading] = useState(false);
 
   const toggleChat = () => setOpen(!open);
@@ -13,7 +13,10 @@ const ChatBotButton = () => {
   const sendMessage = async () => {
     if (!input.trim()) return;
 
+    const userMessage = { role: 'user', content: input };
+    setChat(prev => [...prev, userMessage]);
     setLoading(true);
+
     try {
       const res = await fetch('http://173.212.224.226:11434/api/chat', {
         method: 'POST',
@@ -21,19 +24,26 @@ const ChatBotButton = () => {
         body: JSON.stringify({
           model: 'granite3.3:2b',
           messages: [{ role: 'user', content: `Responde en español: ${input}` }],
-          stream: false // Desactivar streaming
+          stream: false
         })
       });
 
       const data = await res.json();
-      setResponse(data.message?.content || 'No se recibió respuesta');
+      const botMessage = {
+        role: 'assistant',
+        content: data.message?.content || 'No se recibió respuesta'
+      };
+
+      setChat(prev => [...prev, botMessage]);
+      setInput('');
     } catch (error) {
       console.error('Error:', error);
-      setResponse('Error al conectarse al chatbot');
+      setChat(prev => [...prev, { role: 'assistant', content: 'Error al conectarse al chatbot' }]);
     } finally {
       setLoading(false);
     }
-  }
+  };
+
   return (
     <>
       <button className="chat-bot-button" onClick={toggleChat}>
@@ -47,7 +57,12 @@ const ChatBotButton = () => {
             <span className="chat-close" onClick={toggleChat}>×</span>
           </div>
           <div className="chat-body">
-            {loading ? 'Cargando...' : response}
+            {chat.map((msg, idx) => (
+              <div key={idx} className={`chat-message ${msg.role}`}>
+                <strong>{msg.role === 'user' ? 'Tú' : 'Bot'}:</strong> {msg.content}
+              </div>
+            ))}
+            {loading && <div className="chat-message bot">Escribiendo...</div>}
           </div>
           <div className="chat-footer">
             <input
@@ -55,6 +70,7 @@ const ChatBotButton = () => {
               placeholder="Escribe tu pregunta..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
             />
             <button onClick={sendMessage}>Enviar</button>
           </div>
@@ -65,4 +81,3 @@ const ChatBotButton = () => {
 };
 
 export default ChatBotButton;
-
