@@ -18,7 +18,7 @@ const ChatBotButton = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('https://173.212.224.226:11434/api/chat', {
+      const res = await fetch('http://173.212.224.226:11434/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
