@@ -5,7 +5,7 @@ import chatLogo from '../assets/chatbot.svg';
 const ChatBotButton = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
-  const [chat, setChat] = useState([]); // 🟢 Historial de chat
+  const [chat, setChat] = useState([]); // Historial de chat
   const [loading, setLoading] = useState(false);
 
   const toggleChat = () => setOpen(!open);
@@ -18,7 +18,7 @@ const ChatBotButton = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://173.212.224.226:11434/api/chat', {
+      const res = await fetch('https://173.212.224.226:11434/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
