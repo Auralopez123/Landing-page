@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/ChatBotButton.css';
-import chatLogo from '../assets/logo_solo.svg'; // Asegúrate de que este sea el nombre correcto
+import chatLogo from '../assets/chatbot.svg';
 
 const ChatBotButton = () => {
   const [open, setOpen] = useState(false);
