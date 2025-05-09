@@ -18,8 +18,10 @@
   <script>
     window.botpress.init({
       "botId": "42f48e67-bc62-403a-a148-18649560a507",
-      "userData": {
-        "jwt_token": localStorage.getItem('token')
+      "user": {
+        "data": { 
+          "jwt_token": localStorage.getItem('token')
+        }
       },
       "configuration": {
         "botName": "stock-ia-agent",
@@ -40,6 +42,12 @@
       },
       "clientId": "956afd6e-f4cc-4b4d-bd52-0a6e72bd209c"
     });
+
+    window.botpress.updateUser({
+      "data": {
+        "jwt_token": localStorage.getItem('token')
+      }
+    })
   </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
