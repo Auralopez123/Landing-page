@@ -11,44 +11,6 @@
 
 <body>
   <div id="root"></div>
-
-  <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
-  <script src="https://files.bpcontent.cloud/2025/05/09/07/20250509071356-CJ5HT4GQ.js"></script>
-
-  <script>
-    window.botpress.init({
-      "botId": "42f48e67-bc62-403a-a148-18649560a507",
-      "user": {
-        "data": { 
-          "jwt_token": localStorage.getItem('token')
-        }
-      },
-      "configuration": {
-        "botName": "stock-ia-agent",
-        "botAvatar": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
-        "botDescription": "Agente de Soporte al Cliente de Stock IA.",
-        "fabImage": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
-        "website": {},
-        "email": {},
-        "phone": {},
-        "termsOfService": {},
-        "privacyPolicy": {},
-        "color": "#1d4ed8",
-        "variant": "soft",
-        "themeMode": "light",
-        "fontFamily": "inter",
-        "radius": 1,
-        "allowFileUpload": false
-      },
-      "clientId": "956afd6e-f4cc-4b4d-bd52-0a6e72bd209c"
-    });
-
-    window.botpress.updateUser({
-      "data": {
-        "jwt_token": localStorage.getItem('token')
-      }
-    })
-  </script>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 
