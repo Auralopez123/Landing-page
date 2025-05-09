@@ -25,8 +25,7 @@ export default function App() {
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
-
-      {/* Botón flotante del chat visible en toda la app */}
+      {/* El chat de Botpress ahora se carga por CDN en index.html */}
     </>
   );
 }
