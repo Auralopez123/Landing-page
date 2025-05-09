@@ -18,10 +18,13 @@
   <script>
     window.botpress.init({
       "botId": "42f48e67-bc62-403a-a148-18649560a507",
+      "userData": {
+        "jwt_token": localStorage.getItem('token')
+      },
       "configuration": {
         "botName": "stock-ia-agent",
         "botAvatar": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
-        "botDescription": "Agente de Soporte al Cliente Stock IA.",
+        "botDescription": "Agente de Soporte al Cliente de Stock IA.",
         "fabImage": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
         "website": {},
         "email": {},
