@@ -1,127 +1,44 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo_solo.svg" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StockIA</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="https://cdn.botpress.cloud/webchat/v2/inject.js"></script>
-    <script>
-      window.botpress.init({
-        "botId": "42f48e67-bc62-403a-a148-18649560a507",
-        "clientId": "956afd6e-f4cc-4b4d-bd52-0a6e72bd209c",
-        "botName": "StockIA Chat",
-        "containerWidth": "400px",
-        "layoutWidth": "400px",
-        "hideWidget": false,
-        "showPoweredBy": false,
-        "enableConversationDeletion": false,
-        "stylesheet": "",
-        "avatarUrl": "",
-        "enableTranscriptDownload": false,
-        "showCloseButton": true,
-        "showConversationsButton": false,
-        "enableReset": true,
-        "enableNotificationBadge": true,
-        "enableUnreadMessageBadge": true,
-        "enableTranscriptEmail": false,
-        "enablePersistentMenu": false,
-        "enableTimestamp": true,
-        "enableAttachments": true,
-        "enableEmojiPicker": true,
-        "enableFileUpload": true,
-        "enableSpeechRecognition": false,
-        "enableSpeechSynthesis": false,
-        "enableQuickReplies": true,
-        "enableAutoFocus": false,
-        "enableAutoScroll": true,
-        "enableAutoOpen": false,
-        "enableAutoClose": false,
-        "enableAutoHide": false,
-        "enableAutoShow": false,
-        "enableAutoStart": false,
-        "enableAutoStop": false,
-        "enableAutoRestart": false,
-        "enableAutoReconnect": false,
-        "enableAutoReconnectOnClose": false,
-        "enableAutoReconnectOnError": false,
-        "enableAutoReconnectOnTimeout": false,
-        "enableAutoReconnectOnDisconnect": false,
-        "enableAutoReconnectOnNetworkChange": false,
-        "enableAutoReconnectOnVisibilityChange": false,
-        "enableAutoReconnectOnPageShow": false,
-        "enableAutoReconnectOnPageHide": false,
-        "enableAutoReconnectOnPageUnload": false,
-        "enableAutoReconnectOnPageReload": false,
-        "enableAutoReconnectOnPageRefresh": false,
-        "enableAutoReconnectOnPageNavigate": false,
-        "enableAutoReconnectOnPageBack": false,
-        "enableAutoReconnectOnPageForward": false,
-        "enableAutoReconnectOnPageHistory": false,
-        "enableAutoReconnectOnPageHash": false,
-        "enableAutoReconnectOnPagePopState": false,
-        "enableAutoReconnectOnPagePushState": false,
-        "enableAutoReconnectOnPageReplaceState": false,
-        "enableAutoReconnectOnPageScroll": false,
-        "enableAutoReconnectOnPageResize": false,
-        "enableAutoReconnectOnPageOrientationChange": false,
-        "enableAutoReconnectOnPageDeviceMotion": false,
-        "enableAutoReconnectOnPageDeviceOrientation": false,
-        "enableAutoReconnectOnPageTouchStart": false,
-        "enableAutoReconnectOnPageTouchMove": false,
-        "enableAutoReconnectOnPageTouchEnd": false,
-        "enableAutoReconnectOnPageTouchCancel": false,
-        "enableAutoReconnectOnPagePointerDown": false,
-        "enableAutoReconnectOnPagePointerMove": false,
-        "enableAutoReconnectOnPagePointerUp": false,
-        "enableAutoReconnectOnPagePointerCancel": false,
-        "enableAutoReconnectOnPagePointerOver": false,
-        "enableAutoReconnectOnPagePointerOut": false,
-        "enableAutoReconnectOnPagePointerEnter": false,
-        "enableAutoReconnectOnPagePointerLeave": false,
-        "enableAutoReconnectOnPagePointerLockChange": false,
-        "enableAutoReconnectOnPagePointerLockError": false,
-        "enableAutoReconnectOnPageFullscreenChange": false,
-        "enableAutoReconnectOnPageFullscreenError": false,
-        "enableAutoReconnectOnPageVisibilityChange": false,
-        "enableAutoReconnectOnPageFocus": false,
-        "enableAutoReconnectOnPageBlur": false,
-        "enableAutoReconnectOnPageOnline": false,
-        "enableAutoReconnectOnPageOffline": false,
-        "enableAutoReconnectOnPageBatteryChargingChange": false,
-        "enableAutoReconnectOnPageBatteryLevelChange": false,
-        "enableAutoReconnectOnPageBatteryChargingTimeChange": false,
-        "enableAutoReconnectOnPageBatteryDischargingTimeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationChange": false,
-        "enableAutoReconnectOnPageNetworkInformationTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationEffectiveTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationDownlinkChange": false,
-        "enableAutoReconnectOnPageNetworkInformationRttChange": false,
-        "enableAutoReconnectOnPageNetworkInformationSaveDataChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnEffectiveTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnDownlinkChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnRttChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnSaveDataChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnEffectiveTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnDownlinkChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnRttChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnSaveDataChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnEffectiveTypeChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnDownlinkChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnRttChange": false,
-        "enableAutoReconnectOnPageNetworkInformationOnOnOnSaveDataChange": false
-      });
-    </script>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo_solo.svg" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StockIA</title>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://cdn.botpress.cloud/webchat/v2.5/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/05/09/07/20250509071356-CJ5HT4GQ.js"></script>
+
+  <script>
+    window.botpress.init({
+      "botId": "42f48e67-bc62-403a-a148-18649560a507",
+      "configuration": {
+        "botName": "stock-ia-agent",
+        "botAvatar": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
+        "botDescription": "Agente de Soporte al Cliente Stock IA.",
+        "fabImage": "https://files.bpcontent.cloud/2025/05/09/18/20250509180101-MJCERHVJ.svg",
+        "website": {},
+        "email": {},
+        "phone": {},
+        "termsOfService": {},
+        "privacyPolicy": {},
+        "color": "#1d4ed8",
+        "variant": "soft",
+        "themeMode": "light",
+        "fontFamily": "inter",
+        "radius": 1,
+        "allowFileUpload": false
+      },
+      "clientId": "956afd6e-f4cc-4b4d-bd52-0a6e72bd209c"
+    });
+  </script>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
