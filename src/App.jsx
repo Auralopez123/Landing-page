@@ -8,8 +8,6 @@ import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/dashboard/Dashboard';
 import About from './components/dashboard/About';
 import Contact from './components/dashboard/Contact';
-import ChatBotButton from './components/ChatBotButton';
-import './css/ChatBotButton.css';
 
 export default function App() {
   return (
@@ -29,7 +27,6 @@ export default function App() {
       </Routes>
 
       {/* Botón flotante del chat visible en toda la app */}
-      <ChatBotButton />
     </>
   );
 }
