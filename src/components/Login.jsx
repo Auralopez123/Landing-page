@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import { loadBotpress } from "../main";
+import { loadBotpress } from "../utils/botpress";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -24,8 +24,8 @@ export default function Login() {
         localStorage.setItem("token", data.data.token);
         setMsgColor("green");
         setMessage(data.message || "Inicio de sesión exitoso.");
-        loadBotpress();
         navigate("/dashboard");
+        loadBotpress();
         return;
       }
 
