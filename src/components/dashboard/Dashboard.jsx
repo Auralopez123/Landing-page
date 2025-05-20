@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header";
-import Footer from "../Footer";
 import Sidebar from "./Sidebar";
 import DashboardSection from "./DashboardSection";
 import ProductsSection from "./ProductsSection";
@@ -36,20 +34,24 @@ export default function Dashboard() {
       navigate("/login");
       return;
     }
+
     async function fetchData() {
       try {
         const headers = {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         };
+
         const [userRes, prodRes, catRes] = await Promise.all([
           fetch("https://stock-ia.duckdns.org/users/profile", { headers }),
           fetch("https://stock-ia.duckdns.org/products", { headers }),
           fetch("https://stock-ia.duckdns.org/categories", { headers }),
         ]);
+
         const userData = await userRes.json();
         const prodData = await prodRes.json();
         const catData = await catRes.json();
+
         setUser(userData.data);
         setProducts(prodData.data || []);
         setCategories(catData.data || []);
@@ -57,69 +59,46 @@ export default function Dashboard() {
         console.error("Error al cargar datos del dashboard:", err);
       }
     }
+
     fetchData();
   }, [navigate]);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-
-    // Apagar y retirar el widget si está cargado
-    if (window.botpress) {
-      window.botpress.close(); // cierra la ventana del chat :contentReference[oaicite:0]{index=0}
-      window.botpress.hide?.(); // oculta el FAB si usas la v2.5+
-      // quita el iframe y el botón del DOM
-      document
-        .querySelectorAll(".bpWebchat, .bpFab")
-        .forEach((el) => el.remove());
-
-      // permitimos volver a cargarlo cuando el usuario inicie sesión otra vez
-      delete window.botpressLoaded;
-      delete window.botpress;
-    }
-
-    navigate("/login");
-  };
-
   return (
-    <>
-      <div className="dashboard-page" style={{ display: "flex" }}>
-        <Sidebar setSection={setSection} />
-        <div className="main-content">
-          <header className="dashboard-header">
-            <h1>
-              {section === "dashboard"
-                ? "Dashboard"
-                : section === "products"
-                ? "Productos"
-                : "Categorías"}
-            </h1>
-            <button className="logout-btn" onClick={logout}>
-              Cerrar sesión
-            </button>
-          </header>
+    <div className="dashboard-page" style={{ display: "flex" }}>
+      <Sidebar setSection={setSection} />
+      <div className="main-content">
+        <header className="dashboard-header">
+          <h1>
+            {section === "dashboard"
+              ? "Dashboard"
+              : section === "products"
+              ? "Productos"
+              : "Categorías"}
+          </h1>
+        </header>
 
-          {section === "dashboard" && (
-            <DashboardSection
-              user={user}
-              products={products}
-              categories={categories}
-            />
-          )}
+        {section === "dashboard" && (
+          <DashboardSection
+            user={user}
+            products={products}
+            categories={categories}
+          />
+        )}
 
-          {section === "products" && (
-            <ProductsSection
-              products={filteredProducts}
-              categories={categories}
-              setSearchTerm={setSearchTerm}
-              setSortBy={setSortBy}
-            />
-          )}
+        {section === "products" && (
+          <ProductsSection
+            products={filteredProducts}
+            categories={categories}
+            setSearchTerm={setSearchTerm}
+            setSortBy={setSortBy}
+          />
+        )}
 
-          {section === "categories" && (
-            <CategoriesSection categories={categories} products={products} />
-          )}
-        </div>
+        {section === "categories" && (
+          <CategoriesSection categories={categories} products={products} />
+        )}
       </div>
-    </>
+    </div>
   );
 }
+

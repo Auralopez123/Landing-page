@@ -1,16 +1,16 @@
-import React from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import { Outlet } from 'react-router-dom'
+import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
 export default function Layout() {
   return (
-    <>
+    <div className="layout-container">
       <Header />
-      <main >
-        <Outlet /> {/* Aquí se renderiza la ruta hija */}
+      <main className="content-area">
+        <Outlet />
       </main>
       <Footer />
-    </>
-  )
+    </div>
+  );
 }
