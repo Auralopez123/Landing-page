@@ -7,6 +7,7 @@ export default function DashboardSection({ user, products, categories }) {
     if (!products.length || !categories.length) return
 
     const invCtx = document.getElementById('inventoryChart')
+    let inventoryChart = null
     if (invCtx) {
       const map = {}
       categories.forEach(c => { map[c.id] = c.name })
@@ -15,7 +16,7 @@ export default function DashboardSection({ user, products, categories }) {
         const name = map[p.category_id] || 'Sin categoría'
         grouped[name] = (grouped[name] || 0) + parseFloat(p.quantity || 0)
       })
-      new Chart(invCtx, {
+      inventoryChart = new Chart(invCtx, {
         type: 'bar',
         data: {
           labels: Object.keys(grouped),
@@ -29,11 +30,12 @@ export default function DashboardSection({ user, products, categories }) {
     }
 
     const recentCtx = document.getElementById('recentProductsChart')
+    let recentProductsChart = null
     if (recentCtx) {
       const recent = [...products]
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 5)
-      new Chart(recentCtx, {
+      recentProductsChart = new Chart(recentCtx, {
         type: 'bar',
         data: {
           labels: recent.map(p => p.name),
@@ -41,6 +43,15 @@ export default function DashboardSection({ user, products, categories }) {
         },
         options: { responsive: true, scales: { y: { beginAtZero: true } } }
       })
+    }
+
+    return () => {
+      if (inventoryChart) {
+        inventoryChart.destroy()
+      }
+      if (recentProductsChart) {
+        recentProductsChart.destroy()
+      }
     }
   }, [products, categories])
 
