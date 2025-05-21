@@ -1,6 +1,7 @@
 // src/components/dashboard/CategoriesSection.jsx
 import React, { useState } from 'react'
 import { FaSort } from 'react-icons/fa'
+import PropTypes from 'prop-types'
 
 export default function CategoriesSection({ categories, products }) {
   const [sortField, setSortField] = useState('count')
@@ -71,4 +72,14 @@ export default function CategoriesSection({ categories, products }) {
       </table>
     </section>
   )
+}
+
+CategoriesSection.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired,
+  products: PropTypes.arrayOf(PropTypes.shape({
+    category_id: PropTypes.number.isRequired
+  })).isRequired
 }
