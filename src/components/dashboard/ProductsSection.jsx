@@ -1,5 +1,6 @@
 // src/components/dashboard/ProductsSection.jsx
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { FaSort } from 'react-icons/fa'
 import noImage from '../../assets/no_image.jpg';
 
@@ -84,3 +85,20 @@ export default function ProductsSection({ products, categories, setSearchTerm, s
     </section>
   )
 }
+
+ProductsSection.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
+    unit_price: PropTypes.string.isRequired, // Assuming unit_price is a string that will be parsed
+    image_url: PropTypes.string,
+    category_id: PropTypes.number
+  })).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired,
+  setSearchTerm: PropTypes.func.isRequired,
+  setSortBy: PropTypes.func.isRequired
+};
