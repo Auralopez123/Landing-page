@@ -3,15 +3,29 @@
     font-family: 'Poppins', sans-serif;
   }
   
-body.modern-login {
+html, body, #root, .layout-container {
+    height: 100%;
     margin: 0;
+}
+
+body { /* Changed from body.modern-login to affect all pages */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-} 
+    min-height: 100svh; /* Ensure body is at least viewport height */
+}
 
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Ensure layout container takes full height of its parent */
+}
+
+.content-area {
+    flex: 1 0 auto; /* Allow content to grow and shrink, but not shrink smaller than its content */
+    /* padding for content can be added here if needed */
+}
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -22,7 +36,7 @@ body.modern-login {
 .container {
     display: flex;
     flex: 1;
-    min-height: 100vh;
+    min-height: 100svh;
     overflow-y: auto;
 
 }
@@ -165,7 +179,8 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
-    margin-top: 0;
+    /* margin-top: 0; removed as flexbox will handle spacing */
+    flex-shrink: 0; /* Prevent footer from shrinking */
 }
 
 /* Responsive */
