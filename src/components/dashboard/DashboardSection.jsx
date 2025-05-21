@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Chart from 'chart.js/auto'
+import PropTypes from 'prop-types'
 
 export default function DashboardSection({ user, products, categories }) {
   useEffect(() => {
@@ -67,4 +68,20 @@ export default function DashboardSection({ user, products, categories }) {
       <canvas id="recentProductsChart" height="120"></canvas>
     </section>
   )
+}
+
+DashboardSection.propTypes = {
+  user: PropTypes.shape({
+    email: PropTypes.string
+  }),
+  products: PropTypes.arrayOf(PropTypes.shape({
+    category_id: PropTypes.any,
+    quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    createdAt: PropTypes.string,
+    name: PropTypes.string
+  })).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.any.isRequired,
+    name: PropTypes.string.isRequired
+  })).isRequired
 } 
