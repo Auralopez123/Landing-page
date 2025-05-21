@@ -24,6 +24,8 @@ body { /* Changed from body.modern-login to affect all pages */
 
 .content-area {
     flex: 1 0 auto; /* Allow content to grow and shrink, but not shrink smaller than its content */
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Arrange children in a column */
     /* padding for content can be added here if needed */
 }
 
