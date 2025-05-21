@@ -63,17 +63,22 @@ export default function Dashboard() {
     fetchData();
   }, [navigate]);
 
+  let headerTitle;
+  if (section === "dashboard") {
+    headerTitle = "Dashboard";
+  } else if (section === "products") {
+    headerTitle = "Productos";
+  } else {
+    headerTitle = "Categorías";
+  }
+
   return (
     <div className="dashboard-page" style={{ display: "flex" }}>
       <Sidebar setSection={setSection} />
       <div className="main-content">
         <header className="dashboard-header">
           <h1>
-            {section === "dashboard"
-              ? "Dashboard"
-              : section === "products"
-              ? "Productos"
-              : "Categorías"}
+            {headerTitle}
           </h1>
         </header>
 

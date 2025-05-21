@@ -1,7 +1,7 @@
 // src/components/dashboard/ProductsSection.jsx
 import React, { useState } from 'react'
 import { FaSort } from 'react-icons/fa'
-import noImage from '/src/assets/no_image.jpg';
+import noImage from '../../assets/no_image.jpg';
 
 
 export default function ProductsSection({ products, categories, setSearchTerm, setSortBy }) {
@@ -69,6 +69,7 @@ export default function ProductsSection({ products, categories, setSearchTerm, s
                 src={p.image_url ? `https://stock-ia.duckdns.org${p.image_url}` : noImage}
                 alt={p.name}
                 className="product-image"
+                onError={(e) => { e.target.onerror = null; e.target.src = noImage; }}
               />
 
               </td>
