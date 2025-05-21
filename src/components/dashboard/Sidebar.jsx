@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 export default function Sidebar({ setSection }) {
   return (
@@ -12,3 +13,7 @@ export default function Sidebar({ setSection }) {
     </div>
   )
 }
+
+Sidebar.propTypes = {
+  setSection: PropTypes.func.isRequired
+};
