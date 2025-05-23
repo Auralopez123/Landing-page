@@ -1,4 +1,4 @@
-name: Deploy Node.js Landing to Ubuntu Contabo Server via SSH
+name: Deploy Node.js Landing to Ubuntu Contabo Server via SSH and rsync
 
 on:
   push:
@@ -15,7 +15,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy via SSH
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync files to server via rsync
+        uses: burnett01/rsync-deployments@7.0.2
+        with:
+          switches: "-avzr --delete --exclude='.git*' --exclude='.github' --exclude='node_modules'"
+          path: "./"
+          remote_path: "/home/projects/stock-ia-landing"
+          remote_host: 173.212.224.226
+          remote_user: root
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: Execute remote commands
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: 173.212.224.226
@@ -29,9 +42,6 @@ jobs:
             # Navigate to the project directory
             cd /home/projects/stock-ia-landing
 
-            # Pull the latest changes from the main branch
-            git pull origin main
-            
             # Install dependencies
             npm ci
 
