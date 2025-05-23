@@ -1,0 +1,45 @@
+name: Deploy Node.js Landing to Ubuntu Contabo Server via SSH
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Production Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 173.212.224.226
+          username: root
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            
+            # Navigate to the project directory
+            cd /home/projects/stock-ia-landing
+
+            # Pull the latest changes from the main branch
+            git pull origin main
+            
+            # Install dependencies
+            npm ci
+
+            # Build the project
+            npm run build
+
+            # Install serve globally if not already installed
+            npm install -g serve
+
+            # Serve the dist folder with PM2
+            pm2 restart stock-ia-landing || pm2 start --name stock-ia-landing serve -- dist -p 8888
